@@ -12,7 +12,11 @@ CREATE TABLE departments (
     id SERIAL PRIMARY KEY,
     name_department VARCHAR(50)
 );
-INSERT INTO departments (name_department) VALUES ('Proyecto');
+
+CREATE TABLE drives(
+    id SERIAL PRIMARY KEY,
+    name_link VARCHAR(50)
+);
 
 CREATE TABLE workers(
     id SERIAL PRIMARY KEY,
@@ -20,19 +24,15 @@ CREATE TABLE workers(
     last_name VARCHAR (50),
     rut  INT,
     home_address VARCHAR (100),
-    FOREIGN KEY (id) REFERENCES departments (id)
+    id_department INT,
+    FOREIGN KEY (id_department) REFERENCES departments (id)
 );
-INSERT INTO workers (name_employee, last_name, rut, home_address) VALUES ('Cristóbal', 'Paredes', '16920292', 'Javiera Carrera #50');
-
-CREATE TABLE drives(
-    id SERIAL PRIMARY KEY,
-    name_link VARCHAR(50)
-);
-INSERT INTO drives (name_link) VALUES ('Liquidación Junio 2020');
 
 CREATE TABLE liquidations_in_drive (
     id SERIAL PRIMARY KEY,
-    FOREIGN KEY (id) REFERENCES workers (id),
-    FOREIGN KEY (id) REFERENCES drives (id)
+    id_workers INT,
+    id_drives INT,
+    FOREIGN KEY (id_workers) REFERENCES workers (id),
+    FOREIGN KEY (id_drives) REFERENCES drives (id)
 );
 
